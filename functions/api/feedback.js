@@ -41,7 +41,7 @@ export async function onRequestPost(context) {
       open2: truncate(String(open2 || ""), 3000),
       email: truncate(String(email || ""), 320),
       language: truncate(String(submitContext.language || ""), 32),
-      selected_seed_attractions_en: Array.isArray(submitContext.selected_items) ? submitContext.selected_items.slice(0, 30) : [],
+      selected_items: Array.isArray(submitContext.selected_items) ? submitContext.selected_items.slice(0, 30) : [],
       selected_item_ids: Array.isArray(submitContext.selected_item_ids) ? submitContext.selected_item_ids.slice(0, 30) : [],
       top_type_key: truncate(String(submitContext.top_type_key || ""), 64),
       top_type_label: truncate(String(submitContext.top_type_label || ""), 128),
