@@ -26,8 +26,7 @@ export async function onRequestPost(context) {
       return json({ error: "Missing or invalid required fields" }, 400);
     }
 
-    const FEEDBACK_TO = env.FEEDBACK_TO_EMAIL || "xulajiyoujian@gmail.com";
-    if (!env.RESEND_API_KEY || !env.FEEDBACK_FROM_EMAIL) {
+    if (!env.RESEND_API_KEY || !env.FEEDBACK_TO_EMAIL || !env.FEEDBACK_FROM_EMAIL) {
       return json({ error: "Server email configuration is incomplete" }, 500);
     }
 
@@ -42,7 +41,7 @@ export async function onRequestPost(context) {
       open2: truncate(String(open2 || ""), 3000),
       email: truncate(String(email || ""), 320),
       language: truncate(String(submitContext.language || ""), 32),
-      selected_items: Array.isArray(submitContext.selected_items) ? submitContext.selected_items.slice(0, 30) : [],
+      selected_seed_attractions_en: Array.isArray(submitContext.selected_items) ? submitContext.selected_items.slice(0, 30) : [],
       selected_item_ids: Array.isArray(submitContext.selected_item_ids) ? submitContext.selected_item_ids.slice(0, 30) : [],
       top_type_key: truncate(String(submitContext.top_type_key || ""), 64),
       top_type_label: truncate(String(submitContext.top_type_label || ""), 128),
@@ -110,7 +109,7 @@ export async function onRequestPost(context) {
           <li>Q6 actual_trip_intent: ${escapeHtml(safe.q6)}</li>
         </ul>
 
-        <h3>Selected items</h3>
+        <h3>Selected seed attractions (English)</h3>
         <p>${safe.selected_items.length ? safe.selected_items.map(escapeHtml).join(" | ") : "-"}</p>
 
         <h3>Open feedback 1</h3>
@@ -134,7 +133,7 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify({
         from: env.FEEDBACK_FROM_EMAIL,
-        to: [FEEDBACK_TO],
+        to: [env.FEEDBACK_TO_EMAIL],
         subject,
         text,
         html,

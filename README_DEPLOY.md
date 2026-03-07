@@ -11,7 +11,7 @@
 2. Upload this whole directory as your project.
 3. In Cloudflare Pages dashboard, set these production environment variables:
    - `RESEND_API_KEY`
-   - `FEEDBACK_TO_EMAIL` (default target in this package is `xulajiyoujian@gmail.com` if not set)
+   - `FEEDBACK_TO_EMAIL`
    - `FEEDBACK_FROM_EMAIL`
 4. Make sure the `FEEDBACK_FROM_EMAIL` domain or subdomain is verified in Resend.
 5. Redeploy the Pages project.
